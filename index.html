@@ -118,8 +118,9 @@ textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 4px var(--
 <section class="step" data-step="4">
 <div class="head"><span data-dog="ureshi"></span><div><h2>ありがとうございます</h2><p>入れた内容は下のとおりです。よければ、LINEで送ってください。</p></div></div>
 <div class="sum" id="sum"></div>
+<div class="ok">下のボタンを押すと、文がコピーされて、LINEが開きます。<br>① はじめての方は<b>「追加」</b>を押す<br>② <b>トーク</b>を開いて、入力欄を長押し→<b>「貼り付け」</b><br>③ <b>送信</b>を押す</div>
 <div class="nav"><button class="btn line" type="button" id="send"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#fff"/><path d="M16 7C10.2 7 5.6 10.8 5.6 15.4c0 4.1 3.6 7.6 8.6 8.3.3.1.8.2.9.5.1.3.1.7 0 .9l-.1.9c0 .3-.2 1 .9.5 1.1-.5 6-3.5 8.2-6 1.5-1.7 2.3-3.4 2.3-5.1C26.4 10.8 21.8 7 16 7Z" fill="#06C755"/></svg>LINEで送る</button></div>
-<div class="ok" id="done" style="display:none">文をコピーして、LINEを開きました。<br>LINEに文が入っていたら、そのまま<b>送信</b>を押してください。<br>入っていなければ、入力欄を長押しして<b>「貼り付け」</b>→<b>送信</b>でお願いします。</div>
+<div class="ok" id="done" style="display:none">文をコピーしました。<br>LINEが開かないときは、もう一度ボタンを押してください。<br>LINEのトークで、入力欄を長押し→<b>「貼り付け」</b>→<b>送信</b>でお願いします。</div>
 <button class="sub" type="button" id="copy">文のコピーだけする</button>
 <div class="ok" id="copied" style="display:none">コピーしました。LINEのトークに貼り付けて送ってください。</div>
 <textarea id="text" readonly style="margin-top:12px;min-height:140px;font-size:15px" aria-label="送る文"></textarea>
@@ -130,8 +131,7 @@ textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 4px var(--
 <script>
 (()=>{
 const $=id=>document.getElementById(id);
-const LINE_ID='@874zlqng';
-const LINE_URL='https://line.me/R/oaMessage/'+encodeURIComponent(LINE_ID)+'/?';
+const LINE_URL='https://lin.ee/P1ODClo';
 const LABELS=['はじめに','毎月のお金','いまあるお金','これからの予定','LINEで送る'];
 const WHO=['わたし','パートナー'];
 
@@ -237,7 +237,7 @@ function copy(t){
 }
 function fallback(t){const ta=$('text');ta.value=t;ta.removeAttribute('readonly');ta.select();ta.setSelectionRange(0,t.length);try{document.execCommand('copy')}catch(e){}ta.setAttribute('readonly','');ta.blur()}
 $('send').onclick=()=>{const t=$('text').value;copy(t);$('done').style.display='';
- setTimeout(()=>{location.href=LINE_URL+encodeURIComponent(t)},350)};
+ setTimeout(()=>{location.href=LINE_URL},350)};
 $('copy').onclick=()=>{copy($('text').value);$('copied').style.display=''};
 })();
 </script>
