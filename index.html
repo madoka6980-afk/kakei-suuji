@@ -71,7 +71,8 @@ textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 4px var(--
 .sum h3{font-size:17px;color:var(--teal);margin:10px 0 2px}
 .sum h3:first-child{margin-top:0}
 .sum .line{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:17px}
-.sum .line b{white-space:nowrap;text-align:right}
+.sum .line span{white-space:nowrap}
+.sum .line b{text-align:right}
 .sum .line b.wrapit{white-space:normal}
 .sum .line b.mute{color:var(--ink2);font-weight:500}
 .ok{background:var(--goldbg);border:2px solid var(--goldfill);border-radius:16px;padding:14px 18px;font-size:17px;margin-top:12px}
@@ -222,7 +223,7 @@ function build(){
  const d=new Date();const lines=['【家計の数字】'+d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()+'（'+(people===2?'ご夫婦2人分':'1人分')+'）'];let html='';let any=false;
  [['毎月のお金（万円／月）',Q1],['いまあるお金（万円）',Q2]].forEach(([h,list])=>{
   lines.push('','■'+h);html+=`<h3>${h}</h3>`;
-  list.forEach(q=>{const s=fmt(q);if(s!==null)any=true;lines.push(q.l+'：'+(s===null?'—':s));html+=`<div class="line"><span>${q.l}</span><b class="${s===null||s==='あとで'?'mute':''}">${s===null?'—':s}</b></div>`});
+  list.forEach(q=>{const s=fmt(q);if(s!==null)any=true;lines.push(q.l+'：'+(s===null?'—':s));html+=`<div class="line"><span>${q.l}</span><b class="${s===null||s==='あとで'?'mute':''}">${s===null?'—':s.replace(/／/g,'<br>').replace('（合計 ','<br>合計 ').replace(/）$/,'')}</b></div>`});
  });
  lines.push('','■これからの予定');html+='<h3>これからの予定</h3>';
  Q3.forEach(q=>{const t=$(q.k).value.trim().replace(/\s*\n\s*/g,' ');if(t)any=true;lines.push(q.l+'：'+(t||'—'));html+=`<div class="line"><span>${q.l}</span><b class="wrapit${t?'':' mute'}">${(t||'—').replace(/&/g,'&amp;').replace(/</g,'&lt;')}</b></div>`});
